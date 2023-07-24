@@ -97,14 +97,18 @@ they agreed to complete within a single sprint.
 <p align="center">
     <img src="./images/scrum_board.png" width="500px" />
 </p>
+**Question: is this different from Kanban board?**
 
-2. the product backlog, 
+2. Trello user story mapping
+
+By Namman:
+- the product backlog, 
 product owner builds a list of ideas and features that could go into the product 
 
-3. sprint planning 
+- sprint planning 
 the list of ideas and features is discussed with everyone to narrow down what can go into the next sprint (next step)
 
-4. sprint backlog
+- sprint backlog
 means that we would take the user stories and ideas that we picked in the previous meeting and pick out the missing pieces to work on during the actual sprint 
 
 
