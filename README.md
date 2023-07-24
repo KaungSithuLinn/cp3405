@@ -57,7 +57,7 @@ Check YouTube example [Scrum in 20 mins... (with examples)](https://youtu.be/SWD
 
 
 ```mermaid
-flowchart LR
+flowchart TD
     ProductBacklog[User Story: As a ..., I need ..., so that ...]
     SprintBacklog[Break down user story into specific actionable tasks]
 
