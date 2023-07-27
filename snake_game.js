@@ -25,6 +25,29 @@ let snake = [
 	},
 ];
 
+const DIFFICULTY_LEVEL = {
+	EASY: 3,
+	MEDIUM: 2,
+	HARD: 1,
+};
+
+function changeDifficultyLevel(value) {
+	text = document.getElementById("difficulty-level");
+
+	if (value == 1) {
+		diffcultyLvl = DIFFICULTY_LEVEL.HARD;
+		text.innerHTML = "MODE: HARD";
+	}
+	if (value == 2) {
+		diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
+		text.innerHTML = "MODE: MED";
+	}
+	if (value == 3) {
+		diffcultyLvl = DIFFICULTY_LEVEL.EASY;
+		text.innerHTML = "MODE: EASY";
+	}
+}
+
 let score = 0;
 let highScore = localStorage.getItem("highScore") || 0;
 let changing_direction = false;
@@ -34,6 +57,8 @@ let dx = 10;
 let dy = 0;
 let gameStarted = false;
 let gamePaused = false;
+let increment;
+let diffcultyLvl = DIFFICULTY_LEVEL.HARD;
 
 const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
@@ -96,6 +121,12 @@ function togglePauseGame() {
 	}
 }
 
+function increaseSpeed() {
+	// increase snake speed upon hitting food
+	// return 100 - Math.min(90, score / diffcultyLvl);
+	return 20;
+}
+
 function main() {
 	if (has_game_ended() || gamePaused) {
 		showGameOver();
@@ -103,7 +134,7 @@ function main() {
 	}
 
 	changing_direction = false;
-	const speed = 100 - Math.min(90, score);
+	const speed = increaseSpeed();
 	setTimeout(function onTick() {
 		clear_board();
 		drawFood();

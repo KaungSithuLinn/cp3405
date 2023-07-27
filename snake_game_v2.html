@@ -14,6 +14,12 @@
     Game Over! Your final score: <span id="final-score">0</span><br>
     <button onclick="restartGame()">Restart</button>
   </div>
+  <div class="difficultyLvls">
+    <button value="3" onclick="changeDifficultyLevel(this.value)">Easy</button>
+    <button value="2" onclick="changeDifficultyLevel(this.value)">Medium</button>
+    <button value="1" onclick="changeDifficultyLevel(this.value)">Hard</button>
+  </div>
+  <h1 id="difficulty-level">MODE: </h1>
   <div id="welcome-overlay">
     <div id="welcome-text">Welcome to Snake</div>
     <div id="play-text">Press Space to Play</div>
