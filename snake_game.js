@@ -45,7 +45,7 @@ let gameStarted = false;
 let gamePaused = false;
 let speed = 10;
 let speedIncrement = 5;
-let diffcultyLvl = DIFFICULTY_LEVEL.HARD;
+let diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
 
 const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
@@ -64,15 +64,15 @@ function changeDifficultyLevel(value) {
 
 	if (value == 1) {
 		diffcultyLvl = DIFFICULTY_LEVEL.HARD;
-		text.innerHTML = "MODE: HARD";
+		text.innerHTML = "MODE: hard";
 	}
 	if (value == 2) {
 		diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
-		text.innerHTML = "MODE: MED";
+		text.innerHTML = "MODE: medium";
 	}
 	if (value == 3) {
 		diffcultyLvl = DIFFICULTY_LEVEL.EASY;
-		text.innerHTML = "MODE: EASY";
+		text.innerHTML = "MODE: easy";
 	}
 }
 
@@ -127,7 +127,7 @@ function togglePauseGame() {
 
 function increaseSpeed() {
 	// increase snake speed upon hitting food
-	speed += speedIncrement;
+	speed += speedIncrement / diffcultyLvl;
 	if (speedIncrement < 11) {
 		speedIncrement += score / 10;
 	}
@@ -176,9 +176,20 @@ function drawSnakePart(snakePart) {
 }
 
 function has_game_ended() {
+	// self collision check
 	for (let i = 4; i < snake.length; i++) {
 		if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
 	}
+
+	// wall collision check
+	if (snake[0].x === 0 || snake[0].x === 19) {
+		return true;
+	}
+
+	if (snake[0].y === 0 || snake[0].y === 19) {
+		return true;
+	}
+
 	return false;
 }
 
