@@ -182,11 +182,18 @@ function has_game_ended() {
 	}
 
 	// wall collision check
-	if (snake[0].x === 0 || snake[0].x === 400) {
+	if (snake[0].x == snakeboard.width) {
+		return true;
+	}
+	if (snake[0].x == 0) {
 		return true;
 	}
 
-	if (snake[0].y === 0 || snake[0].y === 400) {
+	if (snake[0].y == snakeboard.height) {
+		return true;
+	}
+
+	if (snake[0].y == 0) {
 		return true;
 	}
 
@@ -264,10 +271,11 @@ function move_snake() {
 	}
 
 	// Move the snake to the opposite side if it crosses the boarders
-	if (snake[0].x >= snakeboard.width) snake[0].x = 0;
-	else if (snake[0].x < 0) snake[0].x = snakeboard.width - 10;
-	if (snake[0].y >= snakeboard.height) snake[0].y = 0;
-	else if (snake[0].y < 0) snake[0].y = snakeboard.height - 10;
+
+	// if (snake[0].x >= snakeboard.width) snake[0].x = 0;
+	// else if (snake[0].x < 0) snake[0].x = snakeboard.width - 10;
+	// if (snake[0].y >= snakeboard.height) snake[0].y = 0;
+	// else if (snake[0].y < 0) snake[0].y = snakeboard.height - 10;
 }
 
 function restartGame() {
