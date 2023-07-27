@@ -2,6 +2,9 @@ const board_border = "black";
 const snake_col = "lightblue";
 const snake_border = "darkblue";
 
+const snakeSpeed = document.getElementById("snakespeed");
+const speedIncText = document.getElementById("speedincrement");
+
 let snake = [
 	{
 		x: 200,
@@ -31,6 +34,31 @@ const DIFFICULTY_LEVEL = {
 	HARD: 1,
 };
 
+let score = 0;
+let highScore = localStorage.getItem("highScore") || 0;
+let changing_direction = false;
+let food_x;
+let food_y;
+let dx = 10;
+let dy = 0;
+let gameStarted = false;
+let gamePaused = false;
+let speed = 10;
+let speedIncrement = 5;
+let diffcultyLvl = DIFFICULTY_LEVEL.HARD;
+
+const snakeboard = document.getElementById("snakeboard");
+const snakeboard_ctx = snakeboard.getContext("2d");
+
+document.addEventListener("keydown", (event) => {
+	if (event.code === "Space" && !gameStarted) {
+		startGame();
+	} else if (event.code === "Escape") {
+		togglePauseGame();
+	}
+	change_direction(event);
+});
+
 function changeDifficultyLevel(value) {
 	text = document.getElementById("difficulty-level");
 
@@ -47,30 +75,6 @@ function changeDifficultyLevel(value) {
 		text.innerHTML = "MODE: EASY";
 	}
 }
-
-let score = 0;
-let highScore = localStorage.getItem("highScore") || 0;
-let changing_direction = false;
-let food_x;
-let food_y;
-let dx = 10;
-let dy = 0;
-let gameStarted = false;
-let gamePaused = false;
-let increment;
-let diffcultyLvl = DIFFICULTY_LEVEL.HARD;
-
-const snakeboard = document.getElementById("snakeboard");
-const snakeboard_ctx = snakeboard.getContext("2d");
-
-document.addEventListener("keydown", (event) => {
-	if (event.code === "Space" && !gameStarted) {
-		startGame();
-	} else if (event.code === "Escape") {
-		togglePauseGame();
-	}
-	change_direction(event);
-});
 
 function startGame() {
 	gameStarted = true;
@@ -123,8 +127,12 @@ function togglePauseGame() {
 
 function increaseSpeed() {
 	// increase snake speed upon hitting food
-	// return 100 - Math.min(90, score / diffcultyLvl);
-	return 20;
+	speed += speedIncrement;
+	if (speedIncrement < 11) {
+		speedIncrement += score / 10;
+	}
+	snakeSpeed.innerHTML = "SPEED: " + speed.toString();
+	speedIncText.innerHTML = "Increment: " + speedIncrement.toString();
 }
 
 function main() {
@@ -132,16 +140,14 @@ function main() {
 		showGameOver();
 		return;
 	}
-
 	changing_direction = false;
-	const speed = increaseSpeed();
 	setTimeout(function onTick() {
 		clear_board();
 		drawFood();
 		move_snake();
 		drawSnake();
 		main();
-	}, speed);
+	}, 100 - speed);
 }
 
 function clear_board() {
@@ -231,6 +237,7 @@ function move_snake() {
 	const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
 	if (has_eaten_food) {
 		score += 10;
+		increaseSpeed();
 		document.getElementById("score").innerHTML = score;
 		document.getElementById("current-score").innerHTML =
 			"Current Score: " + score;
