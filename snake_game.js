@@ -182,11 +182,11 @@ function has_game_ended() {
 	}
 
 	// wall collision check
-	if (snake[0].x === 0 || snake[0].x === 19) {
+	if (snake[0].x === 0 || snake[0].x === 400) {
 		return true;
 	}
 
-	if (snake[0].y === 0 || snake[0].y === 19) {
+	if (snake[0].y === 0 || snake[0].y === 400) {
 		return true;
 	}
 
