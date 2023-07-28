@@ -183,18 +183,31 @@ function has_game_ended() {
 	}
 
 	// wall collision check
+	const tail = {
+		x: snake.at(-1).x - dx,
+		y: snake.at(-1).y - dy,
+	};
+
 	if (snake[0].x == snakeboard.width) {
+		snake.push(tail);
+		drawSnake();
 		return true;
 	}
 	if (snake[0].x == -10) {
+		snake.push(tail);
+		drawSnake();
 		return true;
 	}
 
 	if (snake[0].y == snakeboard.height) {
+		snake.push(tail);
+		drawSnake();
 		return true;
 	}
 
 	if (snake[0].y == -10) {
+		snake.push(tail);
+		drawSnake();
 		return true;
 	}
 
