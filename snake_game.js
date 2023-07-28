@@ -186,7 +186,7 @@ function has_game_ended() {
 	if (snake[0].x == snakeboard.width) {
 		return true;
 	}
-	if (snake[0].x == 0) {
+	if (snake[0].x == -10) {
 		return true;
 	}
 
@@ -194,7 +194,7 @@ function has_game_ended() {
 		return true;
 	}
 
-	if (snake[0].y == 0) {
+	if (snake[0].y == -10) {
 		return true;
 	}
 
