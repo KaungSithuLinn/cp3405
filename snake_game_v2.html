@@ -22,9 +22,9 @@
   <div id="welcome-overlay">
     <div id="welcome-text">Welcome to Snake</div>
     <div class="difficultyLvls">
-      <button value="3" onclick="changeDifficultyLevel(this.value)">Easy</button>
-      <button value="2" onclick="changeDifficultyLevel(this.value)">Medium</button>
-      <button value="1" onclick="changeDifficultyLevel(this.value)">Hard</button>
+      <button class="difficulty-button" value="3" onclick="changeDifficultyLevel(this.value)">Easy</button>
+      <button class="difficulty-button" value="2" onclick="changeDifficultyLevel(this.value)">Medium</button>
+      <button class="difficulty-button" value="1" onclick="changeDifficultyLevel(this.value)">Hard</button>
     </div>
   </div>
 
@@ -70,6 +70,16 @@
 
     #play-text {
       font-size: 24px;
+    }
+
+    .difficulty-button {
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
     }
   </style>
 
