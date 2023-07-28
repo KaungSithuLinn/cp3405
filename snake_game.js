@@ -51,9 +51,7 @@ const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
 
 document.addEventListener("keydown", (event) => {
-	if (event.code === "Space" && !gameStarted) {
-		startGame();
-	} else if (event.code === "Escape") {
+	if (event.code === "Escape") {
 		togglePauseGame();
 	}
 	change_direction(event);
@@ -65,14 +63,17 @@ function changeDifficultyLevel(value) {
 	if (value == 1) {
 		diffcultyLvl = DIFFICULTY_LEVEL.HARD;
 		text.innerHTML = "MODE: hard";
+		startGame();
 	}
 	if (value == 2) {
 		diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
 		text.innerHTML = "MODE: medium";
+		startGame();
 	}
 	if (value == 3) {
 		diffcultyLvl = DIFFICULTY_LEVEL.EASY;
 		text.innerHTML = "MODE: easy";
+		startGame();
 	}
 }
 
@@ -282,7 +283,6 @@ function restartGame() {
 	gameStarted = false;
 	gamePaused = false;
 	document.getElementById("welcome-text").innerText = "Welcome to Snake";
-	document.getElementById("play-text").innerText = "Press Space to Play";
 	document.getElementById("game-over").style.display = "none";
 	startGame();
 }
