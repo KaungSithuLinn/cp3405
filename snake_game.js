@@ -35,7 +35,7 @@ const DIFFICULTY_LEVEL = {
 };
 
 let score = 0;
-let highScore = localStorage.getItem("highScore") || 0;
+let highScore = 0;
 let changing_direction = false;
 let food_x;
 let food_y;
@@ -56,6 +56,17 @@ document.addEventListener("keydown", (event) => {
 	}
 	change_direction(event);
 });
+
+function updateHighScore() {
+	if (localStorage.getItem("highScore") === null) {
+		highScore = 0;
+	} else {
+		highScore = localStorage.getItem("highScore");
+		document.getElementById("high-score").innerHTML =
+			"High Score: " + highScore;
+	}
+}
+updateHighScore();
 
 function changeDifficultyLevel(value) {
 	text = document.getElementById("difficulty-level");
@@ -276,8 +287,7 @@ function move_snake() {
 		if (score > highScore) {
 			highScore = score;
 			localStorage.setItem("highScore", highScore);
-			document.getElementById("high-score").innerHTML =
-				"High Score: " + highScore;
+			updateHighScore();
 		}
 		gen_food();
 	} else {
@@ -303,6 +313,5 @@ function restartGame() {
 function showGameOver() {
 	document.getElementById("game-over").style.display = "block";
 	document.getElementById("final-score").innerHTML = score;
-	const highScore = localStorage.getItem("highScore") || 0;
 	document.getElementById("high-score").innerHTML = "High Score: " + highScore;
 }
