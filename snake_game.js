@@ -35,7 +35,7 @@ const DIFFICULTY_LEVEL = {
 };
 
 let score = 0;
-let highScore = 0;
+let curHighScore = 0;
 let changing_direction = false;
 let food_x;
 let food_y;
@@ -45,7 +45,7 @@ let gameStarted = false;
 let gamePaused = false;
 let speed = 10;
 let speedIncrement = 5;
-let diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
+let difficultyLvl;
 
 const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
@@ -57,42 +57,76 @@ document.addEventListener("keydown", (event) => {
 	change_direction(event);
 });
 
-function updateHighScore() {
-	if (localStorage.getItem("highScore") === null) {
-		highScore = 0;
-	} else {
-		highScore = localStorage.getItem("highScore");
-		document.getElementById("high-score").innerHTML =
-			"High Score: " + highScore;
+function updateScoreTable() {
+	if (score > curHighScore) {
+		switch (difficultyLvl) {
+			case DIFFICULTY_LEVEL.EASY:
+				localStorage.setItem("easyHighScore", score);
+				break;
+			case DIFFICULTY_LEVEL.MEDIUM:
+				localStorage.setItem("mediumHighScore", score);
+				break;
+			case DIFFICULTY_LEVEL.HARD:
+				localStorage.setItem("hardHighScore", score);
+				break;
+		}
 	}
+
+	switch (difficultyLvl) {
+		case DIFFICULTY_LEVEL.EASY:
+			let easyHighScore = localStorage.getItem("easyHighScore") || 0;
+			curHighScore = easyHighScore;
+			break;
+		case DIFFICULTY_LEVEL.MEDIUM:
+			let mediumHighScore = localStorage.getItem("mediumHighScore") || 0;
+			curHighScore = mediumHighScore;
+			break;
+		case DIFFICULTY_LEVEL.HARD:
+			let hardHighScore = localStorage.getItem("hardHighScore") || 0;
+			curHighScore = hardHighScore;
+			break;
+	}
+
+	let easyHighScore = localStorage.getItem("easyHighScore") || 0;
+	document.getElementById("easy-high-score").innerHTML = easyHighScore;
+	let mediumHighScore = localStorage.getItem("mediumHighScore") || 0;
+	document.getElementById("medium-high-score").innerHTML = mediumHighScore;
+	let hardHighScore = localStorage.getItem("hardHighScore") || 0;
+	document.getElementById("hard-high-score").innerHTML = hardHighScore;
+
+	document.getElementById("current-high-score").innerText =
+		"Current Mode High Score: " + curHighScore;
 }
-updateHighScore();
+
+updateScoreTable();
 
 function changeDifficultyLevel(value) {
 	text = document.getElementById("difficulty-level");
 
 	if (value == 1) {
-		diffcultyLvl = DIFFICULTY_LEVEL.HARD;
+		difficultyLvl = DIFFICULTY_LEVEL.HARD;
 		text.innerHTML = "MODE: hard";
-		startGame();
 	}
 	if (value == 2) {
-		diffcultyLvl = DIFFICULTY_LEVEL.MEDIUM;
+		difficultyLvl = DIFFICULTY_LEVEL.MEDIUM;
 		text.innerHTML = "MODE: medium";
-		startGame();
 	}
 	if (value == 3) {
-		diffcultyLvl = DIFFICULTY_LEVEL.EASY;
+		difficultyLvl = DIFFICULTY_LEVEL.EASY;
 		text.innerHTML = "MODE: easy";
-		startGame();
 	}
+	startGame();
+}
+
+function resetScore() {
+	document.getElementById("current-score").innerHTML = "Current Score: 0";
 }
 
 function startGame() {
 	gameStarted = true;
 	document.getElementById("welcome-overlay").style.display = "none";
-	document.getElementById("current-score").innerHTML = "Current Score: 0";
-	document.getElementById("high-score").innerHTML = "High Score: " + highScore;
+	resetScore();
+	updateScoreTable();
 	score = 0;
 	dx = 10;
 	dy = 0;
@@ -139,7 +173,7 @@ function togglePauseGame() {
 
 function increaseSpeed() {
 	// increase snake speed upon hitting food
-	speed += speedIncrement / diffcultyLvl;
+	speed += speedIncrement / difficultyLvl;
 	if (speedIncrement < 11) {
 		speedIncrement += score / 10;
 	}
@@ -284,11 +318,6 @@ function move_snake() {
 		document.getElementById("score").innerHTML = score;
 		document.getElementById("current-score").innerHTML =
 			"Current Score: " + score;
-		if (score > highScore) {
-			highScore = score;
-			localStorage.setItem("highScore", highScore);
-			updateHighScore();
-		}
 		gen_food();
 	} else {
 		snake.pop();
@@ -313,5 +342,5 @@ function restartGame() {
 function showGameOver() {
 	document.getElementById("game-over").style.display = "block";
 	document.getElementById("final-score").innerHTML = score;
-	document.getElementById("high-score").innerHTML = "High Score: " + highScore;
+	updateScoreTable();
 }

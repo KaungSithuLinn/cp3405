@@ -3,12 +3,39 @@
 
 <head>
   <title>Snake Game</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  </link>
 </head>
 
 <body>
   <div id="score">0</div>
   <div id="current-score">Current Score: 0</div>
-  <div id="high-score">High Score: 0</div>
+
+  <div id="current-high-score">Current Mode High Score: 0</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Mode</th>
+        <th>Highest Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Easy</td>
+        <td id="easy-high-score">0</td>
+      </tr>
+      <tr>
+        <td>Medium</td>
+        <td id="medium-high-score">0</td>
+      </tr>
+      <tr>
+        <td>Hard</td>
+        <td id="hard-high-score">0</td>
+      </tr>
+    </tbody>
+  </table>
+
   <canvas id="snakeboard" width="400" height="400"></canvas>
   <div id="game-over" style="display: none; text-align: center;">
     Game Over! Your final score: <span id="final-score">0</span><br>
@@ -27,61 +54,6 @@
       <button class="difficulty-button" value="1" onclick="changeDifficultyLevel(this.value)">Hard</button>
     </div>
   </div>
-
-  <style>
-    #snakeboard {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: lightblue;
-    }
-
-    #score {
-      text-align: center;
-      font-size: 140px;
-    }
-
-    #game-over {
-      text-align: center;
-    }
-
-    #welcome-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: white;
-      font-size: 36px;
-      z-index: 999;
-    }
-
-    #welcome-text {
-      font-size: 48px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    #play-text {
-      font-size: 24px;
-    }
-
-    .difficulty-button {
-      border: none;
-      color: black;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-    }
-  </style>
 
   <script src="snake_game.js"></script>
 </body>
