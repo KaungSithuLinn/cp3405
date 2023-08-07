@@ -16,6 +16,7 @@
       color: var(--snakeboard-background);
       text-shadow: 4px 4px 8px var(--snakeboard-shadow-dark);
     }
+    
     #game-over {
       text-align: center;
       color: var(--snakeboard-background);
@@ -70,7 +71,7 @@
       color: #00ff00; /* Set the initial text color */
       animation: levitate 2s ease-in-out infinite, pulse 2s ease-in-out infinite, glow 2s ease-in-out infinite;
     }
-    
+
     #start-container {
       text-align: center;
       margin-top: 20px;
@@ -218,6 +219,9 @@
       transition: transform 0.2s; /* Add a transition for smooth animation */
     }
     #touch-controls button:active {
+      transform: scale(1.2); /* Apply a scale transformation on button press */
+    }
+    #touch-controls button.pressed {
       transform: scale(1.2); /* Apply a scale transformation on button press */
     }
     
