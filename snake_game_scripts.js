@@ -75,6 +75,9 @@
 
     function startGame() {
       gameStarted = true;
+      // Hide welcome overlay, start button, and other welcome elements
+      document.getElementById('welcome-overlay').style.display = 'none';
+      document.getElementById('start-container').style.display = 'none';
       document.getElementById('welcome-overlay').style.display = 'none';
       document.getElementById('current-score').innerHTML = "Current Score: 0";
       document.getElementById('high-score').innerHTML = "High Score: " + highScore;
