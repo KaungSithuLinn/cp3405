@@ -203,25 +203,52 @@
     }
     #touch-controls {
       position: absolute;
-      bottom: 20px;
+      bottom: 10px; /* Move the buttons slightly higher */
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 5px; /* Reduce the gap between buttons */
       align-items: center;
     }
     
     #touch-controls button {
-      font-size: 24px; /* Adjust the font size as needed */
-      width: 60px; /* Adjust the width as needed */
-      height: 60px; /* Adjust the height as needed */
-      margin: 0 10px; /* Adjust the margin as needed */
-      transition: transform 0.2s; /* Add a transition for smooth animation */
+      font-size: 24px;
+      width: 50px; /* Slightly reduce the button width */
+      height: 50px; /* Slightly reduce the button height */
+      background-color: #eee;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.2s;
     }
-    #touch-controls button:active {
-      transform: scale(1.2); /* Apply a scale transformation on button press */
+    
+    #touch-controls button:hover {
+      background-color: #ddd;
     }
+    
     #touch-controls button.pressed {
-      transform: scale(1.2); /* Apply a scale transformation on button press */
+      transform: scale(1.1);
+    }
+    
+    #moveLeftBtn {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    
+    #moveRightBtn {
+      grid-column: 3;
+      grid-row: 2;
+    }
+    
+    #moveUpBtn {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    
+    #moveDownBtn {
+      grid-column: 2;
+      grid-row: 3;
     }
     
