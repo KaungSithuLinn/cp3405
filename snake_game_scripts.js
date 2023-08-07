@@ -437,6 +437,8 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+let lastDirectionPressed = "right"; // Initialize with a default direction
+
 // Add an event listener to the document to detect key releases
 document.addEventListener('keyup', function(event) {
   let buttonToRelease = null;
