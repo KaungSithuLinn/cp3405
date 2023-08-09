@@ -199,6 +199,7 @@
     /* Add the level selection buttons to the welcome-overlay */
     #level-selection button {
       font-size: 20px;
+      font-family: 'Press Start 2P', cursive, sans-serif;
       padding: 8px 16px;
       margin: 4px;
       background-color: #4caf50;
