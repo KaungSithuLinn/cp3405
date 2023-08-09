@@ -1,15 +1,21 @@
     body {
       background-color: var(--background-color);
     }
+      
     #snakeboard {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      max-width: 100%; /* Ensure the canvas doesn't exceed its container's width */
+      max-height: 100vh; /* Ensure the canvas doesn't exceed the viewport height */
+      width: auto; /* Let the canvas scale its width based on its container */
+      height: auto; /* Let the canvas scale its height based on its container */
       background-color: var(--snakeboard-background);
       border: 10px solid var(--snakeboard-border);
       box-shadow: 8px 8px 16px var(--snakeboard-shadow-dark), -8px -8px 16px var(--snakeboard-shadow-light);
     }
+    
     #score {
       text-align: center;
       font-size: 140px;
@@ -67,7 +73,7 @@
     
     #welcome-text {
       font-family: 'Press Start 2P', cursive, sans-serif;
-      font-size: 36px; /* Adjust the font size as needed */
+      font-size: 30px; /* Adjust the font size as needed */
       color: #00ff00; /* Set the initial text color */
       animation: levitate 2s ease-in-out infinite, pulse 2s ease-in-out infinite, glow 2s ease-in-out infinite;
     }
@@ -203,14 +209,14 @@
     }
     #touch-controls {
       position: absolute;
-      bottom: 10px; /* Move the buttons slightly higher */
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 5px; /* Reduce the gap between buttons */
+      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+      grid-gap: 5px;
       align-items: center;
-    }
+    }    
     
     #touch-controls button {
       font-size: 24px;
