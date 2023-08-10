@@ -6,9 +6,8 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      right: 50%;
-      bottom: 50%;
       transform: translate(-50%, -50%);
+      margin-bottom: 100px; /* Create space between the snake board and controls */
       max-width: 100%; /* Ensure the canvas doesn't exceed its container's width */
       max-height: 100vh; /* Ensure the canvas doesn't exceed the viewport height */
       width: auto; /* Let the canvas scale its width based on its container */
@@ -20,11 +19,20 @@
     }
     
     #score {
-      text-align: center;
-      font-size: 140px;
-      color: var(--snakeboard-background);
+      font-size: 100px;
+      color: #00ff00;
       text-shadow: 4px 4px 8px var(--snakeboard-shadow-dark);
+      text-align: center;
+      margin: 0; /* Remove default margin */
     }
+    
+    #high-score {
+      font-size: 25px;
+      color: #00ff00;
+      text-shadow: 1px 1px 1px var(--snakeboard-shadow-dark);
+      text-align: center;
+      margin: 10px 0 0; /* Adjust the top margin */
+    }      
     
     #game-over {
       text-align: center;
@@ -217,16 +225,16 @@
       left: 50%;
       transform: translateX(-50%);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       grid-gap: 5px;
       align-items: center;
-      margin-top: 20px; /* Add a margin to create space above the touch controls */
-    }    
+      max-width: 200px; /* Limit the width of the touch controls */
+    }
     
     #touch-controls button {
       font-size: 24px;
-      width: 50px; /* Slightly reduce the button width */
-      height: 50px; /* Slightly reduce the button height */
+      width: 50px;
+      height: 50px;
       background-color: #eee;
       border: none;
       border-radius: 50%;
