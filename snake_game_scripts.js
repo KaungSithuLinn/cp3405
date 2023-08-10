@@ -1,6 +1,15 @@
     let powerApple_x;
     let powerApple_y;
 
+    // Add an event listener to detect orientation changes
+    window.addEventListener("orientationchange", function() {
+      if (window.orientation === 0) { // Portrait orientation
+        document.getElementById("landscape-warning").style.display = "block";
+      } else { // Landscape orientation
+        document.getElementById("landscape-warning").style.display = "none";
+      }
+    });
+
     // Check the browser appearance (light/dark mode) and set the CSS variables accordingly
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     function setDarkModePreference() {
@@ -289,7 +298,7 @@
       const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
 
       if (has_eaten_food) {
-        score += 10;
+        score += 1;
         document.getElementById('score').innerHTML = score;
         if (score > highScore) {
           highScore = score;

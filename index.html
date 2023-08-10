@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
   <title>Snake Game</title>
   <link rel="stylesheet" href="snake_game_styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
@@ -9,6 +10,9 @@
 </head>
 
 <body>
+  <div id="landscape-warning" class="warning">
+    <p>Please rotate your device to landscape mode for the best experience.</p>
+  </div>  
   <div id="score">0</div>
   <div id="current-score">Current Score: 0</div>
   <div id="high-score">High Score: 0</div>
@@ -50,7 +54,7 @@
     <button id="moveRightBtn" onclick="moveRight()">→</button>
     <button id="moveUpBtn" onclick="moveUp()">↑</button>
     <button id="moveDownBtn" onclick="moveDown()">↓</button>
-  </div>  
+  </div>
   <audio id="game-over-sound" preload="auto">
       <source src="resources/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3">
       <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
