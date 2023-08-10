@@ -1,15 +1,6 @@
     let powerApple_x;
     let powerApple_y;
 
-    // Add an event listener to detect orientation changes
-    window.addEventListener("orientationchange", function() {
-      if (window.orientation === 0) { // Portrait orientation
-        document.getElementById("landscape-warning").style.display = "block";
-      } else { // Landscape orientation
-        document.getElementById("landscape-warning").style.display = "none";
-      }
-    });
-
     // Check the browser appearance (light/dark mode) and set the CSS variables accordingly
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     function setDarkModePreference() {
