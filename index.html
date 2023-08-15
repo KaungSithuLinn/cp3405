@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
   <title>Snake Game</title>
   <link rel="stylesheet" href="snake_game_styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   <link rel="icon" href="resources/python_logo_pmu_icon.ico" type="image/x-icon">
+  <!-- Include Socket.io library -->
+  <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
 </head>
 
 <body>
@@ -56,6 +57,10 @@
       <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
       <!-- For example: <source src="path/to/your/sound-effect.ogg" type="audio/ogg"> -->
     </audio>
+    <audio id="background-music" preload="auto" loop>
+      <source src="path-to-your-audio-file.mp3" type="audio/mp3">
+      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
+    </audio>    
     <script src="snake_game_scripts.js"></script>
 </body>
 </html>

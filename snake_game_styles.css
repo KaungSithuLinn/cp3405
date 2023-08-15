@@ -291,3 +291,15 @@
         font-size: 25px; /* Adjust the font size for smaller screens */
       }
     }
+    /* Example styling for a player indicator */
+    .player-indicator {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-family: 'Press Start 2P', sans-serif;
+      font-size: 14px;
+      color: #333;
+    }

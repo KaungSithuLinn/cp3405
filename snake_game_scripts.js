@@ -1,6 +1,32 @@
+    // Initialize Socket.io
+    const socket = io();
+    // Example: Sending player movement to the server
+    function sendMove(direction) {
+      socket.emit('move', direction);
+    }
+
+    // Example: Handling movement updates from the server
+    socket.on('move', (data) => {
+      // Update the position of the player with data.playerId
+      // and the new direction data.direction
+    });
+
+    // Example: Handling player disconnection
+    socket.on('playerDisconnected', (playerId) => {
+      // Remove the disconnected player from your game
+    });
     let powerApple_x;
     let powerApple_y;
-
+    const backgroundMusic = document.getElementById("background-music");
+    // Function to start playing the background music
+    function playBackgroundMusic() {
+      backgroundMusic.play();
+    }
+    // Function to stop playing the background music
+    function stopBackgroundMusic() {
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
+    }
     // Check the browser appearance (light/dark mode) and set the CSS variables accordingly
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     function setDarkModePreference() {
@@ -75,6 +101,7 @@
 
     function startGame() {
       gameStarted = true;
+      playBackgroundMusic(); // Start playing the music
       // Hide welcome overlay, start button, and other welcome elements
       document.getElementById('welcome-overlay').style.display = 'none';
       document.getElementById('start-container').style.display = 'none';
@@ -325,6 +352,7 @@
     }
 
     function showGameOver() {
+      stopBackgroundMusic(); // Stop the music
 // Display the "Game Over" screen (existing code)
 document.getElementById('game-over').style.display = 'block';
 document.getElementById('final-score').innerHTML = score;
