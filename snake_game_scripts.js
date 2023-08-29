@@ -220,7 +220,10 @@
     }
 
     function drawSnake() {
-      snake.forEach(drawSnakePart);
+      snake.forEach((part, index) => {
+        const isHead = index === 0;
+        drawSnakePart(part, isHead);
+      });
     }
 
     function drawFood() {
@@ -230,8 +233,8 @@
       snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
     }
 
-    function drawSnakePart(snakePart) {
-      snakeboard_ctx.fillStyle = snake_col;
+    function drawSnakePart(snakePart, isHead = false) {
+      snakeboard_ctx.fillStyle = isHead ? 'blue' : 'green'; // Use blue color for the head, green for the body
       snakeboard_ctx.strokestyle = snake_border;
       snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
       snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
