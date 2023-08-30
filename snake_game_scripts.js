@@ -221,9 +221,20 @@
 
     function drawSnake() {
       snake.forEach((part, index) => {
-        const isHead = index === 0;
-        drawSnakePart(part, isHead);
+        drawSnakePart(part, index);
       });
+    }
+
+    function getPatternColor(patternSegment) {
+      // Define color mappings for each pattern segment
+      const colorMap = {
+        'pattern-segment-1': 'blue',
+        'pattern-segment-2': 'green',
+        'pattern-segment-3': 'red',
+        // ... Add more color mappings
+      };
+    
+      return colorMap[patternSegment] || 'blue'; // Default to blue if segment not found
     }
 
     function drawFood() {
@@ -233,8 +244,16 @@
       snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
     }
 
-    function drawSnakePart(snakePart, isHead = false) {
-      snakeboard_ctx.fillStyle = isHead ? 'blue' : 'green'; // Use blue color for the head, green for the body
+    const snakeDesignPattern = [
+      'pattern-segment-1',
+      'pattern-segment-2',
+      'pattern-segment-3',
+      // ... Define more segments of the pattern
+    ];
+    
+    function drawSnakePart(snakePart, index) {
+      const patternSegment = snakeDesignPattern[index % snakeDesignPattern.length];
+      snakeboard_ctx.fillStyle = getPatternColor(patternSegment); // Get color based on the pattern segment
       snakeboard_ctx.strokestyle = snake_border;
       snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
       snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
