@@ -6,13 +6,13 @@
     }
 
     // Example: Handling movement updates from the server
-    socket.on('move', (data) => {
+    socket.on('move', () => {
       // Update the position of the player with data.playerId
       // and the new direction data.direction
     });
 
     // Example: Handling player disconnection
-    socket.on('playerDisconnected', (playerId) => {
+    socket.on('playerDisconnected', () => {
       // Remove the disconnected player from your game
     });
     let powerApple_x;
