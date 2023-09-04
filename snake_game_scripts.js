@@ -1,5 +1,30 @@
-    // Initialize Socket.io
-    const socket = io();
+    // Function to update the server status message
+    function updateServerStatus(message) {
+      const serverStatusElement = document.getElementById('server-status');
+      if (serverStatusElement) {
+          serverStatusElement.textContent = message;
+      }
+    }
+
+// Connect to the Socket.io server
+const socket = io();
+
+// Listen for a custom event from the server indicating that it's ready
+socket.on('connect', () => {
+    updateServerStatus('Connected to the server.'); // Connection established
+});
+
+socket.on('disconnect', () => {
+    updateServerStatus('Disconnected from the server.'); // Connection lost
+});
+
+socket.on('reconnect', () => {
+    updateServerStatus('Reconnected to the server.'); // Reconnection successful
+});
+
+socket.on('serverReady', () => {
+    updateServerStatus('Server is ready and running.'); // Server is ready
+});
     // Example: Sending player movement to the server
     function sendMove(direction) {
       socket.emit('move', direction);
@@ -161,12 +186,16 @@
 
     function togglePauseGame() {
       if (!gameStarted || has_game_ended()) return; // Check if the game hasn't started or has ended
-        
+    
       gamePaused = !gamePaused;
-        
+    
       // Hide or show the "Wall Collision" switch and label based on the game state
       const wallCollisionSwitch = document.getElementById('wall-collision-switch');
       wallCollisionSwitch.style.display = gamePaused ? 'none' : 'block';
+    
+      // Hide or show the level-related elements based on the game state
+      const levelSelection = document.getElementById('level-selection');
+      levelSelection.style.display = gamePaused ? 'none' : 'block';
     
       if (gamePaused) {
         document.getElementById('welcome-text').innerText = "Paused";
@@ -176,7 +205,7 @@
         document.getElementById('welcome-overlay').style.display = 'none';
         main();
       }
-    }                
+    }                    
 
   // Define the levels and their parameters
   const levels = [
@@ -492,3 +521,58 @@ document.addEventListener('keyup', function(event) {
     buttonToRelease.classList.remove('pressed'); // Remove the press animation class
   }
 });
+
+// Define the high score array
+const highScores = [];
+
+// Function to load high scores from local storage
+function loadHighScores() {
+  const storedScores = localStorage.getItem('highScores');
+  if (storedScores) {
+    highScores.push(...JSON.parse(storedScores));
+  }
+}
+
+// Function to save high scores to local storage
+function saveHighScores() {
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+}
+
+// Function to display the high score table
+function displayHighScores() {
+  // Sort the high scores in descending order
+  highScores.sort((a, b) => b.score - a.score);
+
+  const highScoreTable = document.getElementById('high-score-table');
+  const tableBody = highScoreTable.querySelector('tbody');
+
+  // Clear the table body
+  tableBody.innerHTML = '';
+
+  // Populate the table with high scores
+  for (let i = 0; i < highScores.length; i++) {
+    const scoreData = highScores[i];
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${i + 1}</td><td>${scoreData.name}</td><td>${scoreData.score}</td>`;
+    tableBody.appendChild(row);
+  }
+}
+
+// Function to add a new high score
+function addHighScore(name, score) {
+  highScores.push({ name, score });
+  saveHighScores();
+}
+
+// Example of how to add a high score (call this function when the game ends)
+function recordHighScore() {
+  const playerName = prompt('Congratulations! You made it to the high score table. Enter your name:');
+  if (playerName) {
+    addHighScore(playerName, score);
+    displayHighScores();
+  }
+}
+
+// Call the necessary functions to load and display high scores
+loadHighScores();
+displayHighScores();
