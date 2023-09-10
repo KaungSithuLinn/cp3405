@@ -28,8 +28,7 @@
     <div id="start-container">
       <button id="start-button" onclick="startGame()">Start</button>
     </div>
-    <!-- Add server status message -->
-    <div id="server-status">Connecting to the server...</div>
+    
     <!-- Add the level indicator element -->
     <div id="level-indicator">Level 1</div>
     <div id="level-selection">
@@ -54,34 +53,14 @@
     <button id="moveDownBtn" onclick="moveDown()">↓</button>
   </div>
   <audio id="game-over-sound" preload="auto">
-    <source src="resources/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3">
-    <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
-    <!-- For example: <source src="path/to/your/sound-effect.ogg" type="audio/ogg"> -->
-  </audio>
-  <audio id="background-music" preload="auto" loop>
-    <source src="resources/Press_Start.mp3" type="audio/mp3">
-    <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
-  </audio>
-
-<!-- High Score Table -->
-<div id="high-score-table">
-  <h2>High Score Table</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody id="high-score-list">
-      <!-- High scores will be added here dynamically using JavaScript -->
-    </tbody>
-  </table>
-  <button onclick="toggleHighScoreTable()">Close</button>
-</div>
-
-<!-- Add your JavaScript file here -->
-<script src="snake_game_scripts.js"></script>
+      <source src="resources/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3">
+      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
+      <!-- For example: <source src="path/to/your/sound-effect.ogg" type="audio/ogg"> -->
+    </audio>
+    <audio id="background-music" preload="auto" loop>
+      <source src="resources/Press_Start.mp3" type="audio/mp3">
+      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
+    </audio>    
+    <script src="snake_game_scripts.js"></script>
 </body>
 </html>
