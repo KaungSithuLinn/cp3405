@@ -1,66 +1,70 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Snake Game</title>
-  <link rel="stylesheet" href="snake_game_styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-  <link rel="icon" href="resources/python_logo_pmu_icon.ico" type="image/x-icon">
-  <!-- Include Socket.io library -->
-  <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
-</head>
+<html lang="en-us">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114106362-3"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
 
-<body>
-  <div id="score">0</div>
-  <div id="high-score">High Score: 0</div>
-  <canvas id="snakeboard" width="400" height="400"></canvas>
-  <div id="game-over" style="display: none;">
-    <div id="game-over-content">
-      <h2>Game Over!</h2>
-      <p>Your final score: <span id="final-score">0</span></p>
-      <button onclick="restartGame()">Restart</button>
-    </div>
-  </div>
-  <!-- Add the level selection menu to the welcome overlay -->
-  <div id="welcome-overlay">
-    <div id="welcome-text">PYXEL PYTHON</div>
-    <!-- Start Button-->
-    <div id="start-container">
-      <button id="start-button" onclick="startGame()">Start</button>
-    </div>
-    
-    <!-- Add the level indicator element -->
-    <div id="level-indicator">Level 1</div>
-    <div id="level-selection">
-      <button onclick="selectLevel('easy')">Easy</button>
-      <button onclick="selectLevel('medium')">Medium</button>
-      <button onclick="selectLevel('hard')">Hard</button>
-    </div>
-    <div id="play-text">Press Space to Play</div>
-    <div id="wall-collision-switch">
-      <label class="switch">
-        <input type="checkbox" id="wall-collision-toggle" onclick="toggleWallCollision()">
-        <span class="slider round"></span>
-      </label>
-      <span id="wall-collision-label">Wall Collision: On</span>
-    </div>
-  </div>
+			gtag('config', 'UA-114106362-3');
+		</script>
 
-  <div id="touch-controls">
-    <button id="moveLeftBtn" onclick="moveLeft()">←</button>
-    <button id="moveRightBtn" onclick="moveRight()">→</button>
-    <button id="moveUpBtn" onclick="moveUp()">↑</button>
-    <button id="moveDownBtn" onclick="moveDown()">↓</button>
-  </div>
-  <audio id="game-over-sound" preload="auto">
-      <source src="resources/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3">
-      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
-      <!-- For example: <source src="path/to/your/sound-effect.ogg" type="audio/ogg"> -->
-    </audio>
-    <audio id="background-music" preload="auto" loop>
-      <source src="resources/Press_Start.mp3" type="audio/mp3">
-      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
-    </audio>    
-    <script src="snake_game_scripts.js"></script>
-</body>
+		<title>Multiplayer Snake</title>
+		<meta name="robots" content="noindex">
+		<meta charset="utf-8" />
+		<meta name="description" content="pgattic's Web Games">
+		<meta name="author" content="Preston Corless, SaveState">
+		<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+		<style>
+			canvas {
+				padding: 0;
+				display: block;
+				margin: 0 auto;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+			#menu {
+				background: #8888;
+				font-family: Arial;
+				margin: 0;
+				padding: 10px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				place-items: center;
+				border-radius: 5px;
+			}
+			#menu>* {
+				margin: 3px auto;
+				width: fit-content;
+			}
+			input[type=number] {
+				width: 32px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="100%" height="100%">Sorry, your browser doesn't support HTML5 Canvas! Choose a different browser please!</canvas>
+		<form id="menu" oninput="applySettings()">
+			<h1>Settings</h1>
+			<p>Dark Mode:<input type="checkbox"id="darkBox"></p>
+			<p>Tile Size: <span id="unitOut">24</span>px<input type="range" value="24" min="1" max="64" id="unitBox"></p>
+			<p>Food Value: <input type="number" value="5" id="foodValBox"></p>
+			<p>Amount of Food: <input type="number" value="3" id="foodAmtBox"></p>
+			<p>Start Length: <input type="number" value="5" id="startScoreBox"></p>
+			<p>Players Drop Food:<input type="checkbox"id="pFoodBox"checked="true"></p>
+			<p>Loop through screen edge:<input type="checkbox"id="loopBox"></p>
+			<div><input type="button" value="Resume" onclick="togglePause()"><input type="button" value="Reset Options" onclick="resetOptions()"></div>
+			<small>Ver 2.2</small>
+		</form>
+		<script src="script.js"></script>
+	</body>
 </html>
