@@ -1,154 +1,216 @@
 <!DOCTYPE html>
-<!-- # Multiplayer Snake Documentation
+<!-- Snake Game Documentation -->
+<!--  Introduction
+This is the documentation for the Snake Game, which is an HTML-based game implemented using JavaScript. The game allows the player to control a snake and navigate it to eat food and grow. The objective is to achieve the highest possible score without colliding with the walls or the snake's own body.
 
-This is the documentation for the code in the Multiplayer Snake game.
+ Files
+The Snake Game consists of the following files:
 
-## HTML Structure
+1. `snake_game_styles.css`: This file contains the CSS styles for the Snake Game.
+2. `snake_game_scripts.js`: This file contains the JavaScript code for the Snake Game.
+3. `resources/2G7CF5V-gamers-fail-game.mp3`: This is an audio file that plays when the game is over.
+4. `resources/Press_Start.mp3`: This is an audio file that plays in the background while playing the game.
 
-The code is written in HTML and consists of the following structure:
+ HTML Structure
+The Snake Game is implemented using HTML and has the following structure:
 
-```html -->
-<html lang="en-us">
+ `<!DOCTYPE html>`
+This line declares the HTML document type.
+
+ `<html>`
+The root element of the HTML document.
+
+ `<head>`
+This section contains meta information and external resource references.
+
+ `<body>`
+The main content of the Snake Game.
+
+ `<div id="score">`
+This div displays the player's current score.
+
+ `<div id="high-score">`
+This div displays the highest score achieved.
+
+ `<canvas id="snakeboard">`
+This canvas element is used to draw the game board and the snake.
+
+ `<div id="game-over">`
+This div is displayed when the game is over.
+
+ `<div id="game-over-content">`
+This div contains the content of the game over message.
+
+ `<h2>`
+This heading displays the game over message.
+
+ `<p>`
+This paragraph displays the player's final score.
+
+ `<span id="final-score">`
+This span displays the final score.
+
+ `<button onclick="restartGame()">`
+This button allows the player to restart the game.
+
+ `<div id="welcome-overlay">`
+This div is displayed at the start of the game.
+
+ `<div id="welcome-text">`
+This div displays the title of the game.
+
+ `<div id="start-container">`
+This div contains the start button.
+
+ `<button id="start-button" onclick="startGame()">`
+This button starts the game when clicked.
+
+ `<button id="multiplayer-button">`
+This button opens a new tab with a multi-player game when clicked.
+
+ `<a href="https://cp3405.pages.dev/" target="_blank">`
+This anchor element creates a link to the multi-player game.
+
+ `<div id="level-indicator">`
+This div displays the current level.
+
+ `<div id="level-selection">`
+This div contains the level selection buttons.
+
+ `<button onclick="selectLevel('easy')">`
+This button selects the easy level when clicked.
+
+ `<button onclick="selectLevel('medium')">`
+This button selects the medium level when clicked.
+
+ `<button onclick="selectLevel('hard')">`
+This button selects the hard level when clicked.
+
+ `<div id="play-text">`
+This div displays the instruction to press the spacebar to play.
+
+ `<div id="wall-collision-switch">`
+This div contains the wall collision switch.
+
+ `<input type="checkbox" id="wall-collision-toggle" onclick="toggleWallCollision()">`
+This checkbox allows the player to toggle wall collision on or off.
+
+ `<span id="wall-collision-label">`
+This span displays the current wall collision status.
+
+ `<div id="touch-controls">`
+This div contains the touch controls for mobile devices.
+
+ `<button id="moveLeftBtn" onclick="moveLeft()">`
+This button allows the player to move the snake to the left.
+
+ `<button id="moveRightBtn" onclick="moveRight()">`
+This button allows the player to move the snake to the right.
+
+ `<button id="moveUpBtn" onclick="moveUp()">`
+This button allows the player to move the snake upwards.
+
+ `<button id="moveDownBtn" onclick="moveDown()">`
+This button allows the player to move the snake downwards.
+
+ `<audio id="game-over-sound">`
+This audio element plays a sound effect when the game is over.
+
+ `<source src="resources/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3" />`
+This source element specifies the audio file for the sound effect.
+
+ `<audio id="background-music">`
+This audio element plays background music while playing the game.
+
+ `<source src="resources/Press_Start.mp3" type="audio/mp3" />`
+This source element specifies the audio file for the background music.
+
+ `<script src="snake_game_scripts.js"></script>`
+This script element references the JavaScript code for the Snake Game.
+
+ Conclusion
+This documentation provides an overview of the structure and components of the Snake Game. The HTML code, CSS styles, and JavaScript code work together to create an interactive and enjoyable gaming experience. -->
+<html>
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-114106362-3"
-    ></script>
-    <!-- Google Analytics configuration script -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "UA-114106362-3");
-    </script>
-
-    <title>Multiplayer Snake</title>
-    <!-- Meta tags -->
-    <meta name="robots" content="noindex" />
-    <meta charset="utf-8" />
-    <meta name="description" content="CP3405's Web Games" />
-    <meta name="author" content="KaungSithuLinn, KaungSithuLinn" />
-
-    <!-- Favicon -->
+    <meta charset="UTF-8" />
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="snake_game_styles.css" />
     <link
-      rel="icon"
-      type="image/png"
-      href="resources/python_logo_pmu_icon.ico"
-      sizes="32x32"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
     />
     <link
       rel="icon"
-      type="image/png"
-      href="resources/python_logo_pmu_icon.ico"
-      sizes="16x16"
+      href="resource/python_logo_pmu_icon.ico"
+      type="image/x-icon"
     />
-
-    <!-- CSS Styles -->
-    <style>
-      canvas {
-        padding: 0;
-        display: block;
-        margin: 0 auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      }
-      #menu {
-        background: #8888;
-        font-family: Arial;
-        margin: 0;
-        padding: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        place-items: center;
-        border-radius: 5px;
-      }
-      #menu > * {
-        margin: 3px auto;
-        width: fit-content;
-      }
-      input[type="number"] {
-        width: 32px;
-      }
-    </style>
+    <!-- Include Socket.io library -->
+    <script src="https://cdn.socket.io/4.1.2/socket.io.js"></script>
   </head>
-  <body>
-    <!-- Main game canvas -->
-    <canvas id="canvas" width="100%" height="100%">
-      Sorry, your browser doesn't support HTML5 Canvas! Choose a different
-      browser please!
-    </canvas>
 
-    <!-- Settings menu -->
-    <form id="menu" oninput="applySettings()">
-      <h1>Settings</h1>
-      <p>
-        Dark Mode:
-        <input type="checkbox" id="darkBox" />
-      </p>
-      <p>
-        Tile Size: <span id="unitOut">24</span>px
-        <input type="range" value="24" min="1" max="64" id="unitBox" />
-      </p>
-      <p>
-        Food Value:
-        <input type="number" value="5" id="foodValBox" />
-      </p>
-      <p>
-        Amount of Food:
-        <input type="number" value="3" id="foodAmtBox" />
-      </p>
-      <p>
-        Start Length:
-        <input type="number" value="5" id="startScoreBox" />
-      </p>
-      <p>
-        Players Drop Food:
-        <input type="checkbox" id="pFoodBox" checked="true" />
-      </p>
-      <p>
-        Loop through screen edge:
-        <input type="checkbox" id="loopBox" />
-      </p>
-      <div>
-        <input type="button" value="Resume" onclick="togglePause()" />
-        <input type="button" value="Reset Options" onclick="resetOptions()" />
+  <body>
+    <div id="score">0</div>
+    <div id="high-score">High Score: 0</div>
+    <canvas id="snakeboard" width="400" height="400"></canvas>
+    <div id="game-over" style="display: none">
+      <div id="game-over-content">
+        <h2>Game Over!</h2>
+        <p>Your final score: <span id="final-score">0</span></p>
+        <button onclick="restartGame()">Restart</button>
       </div>
-      <small>Ver 2.2</small>
-    </form>
-    <!-- Javascript -->
-    <script src="script.js"></script>
+    </div>
+    <!-- Add the level selection menu to the welcome overlay -->
+    <div id="welcome-overlay">
+      <div id="welcome-text">PYXEL PYTHON</div>
+      <!-- Start Button-->
+      <div id="start-container">
+        <button id="start-button" onclick="startGame()">Start</button>
+      </div>
+      <!-- The `<button id="multiplayer-button">` element is creating a button with the text
+      "Multi-Player". When the button is clicked, it will open a new tab with the URL
+      "https://cp3405.pages.dev/". The `target="_blank"` attribute ensures that the link is opened
+      in a new tab or window. -->
+
+      <button id="multiplayer-button" class="multiplayer-button">
+        <a href="https://multiplayersnakegame.pages.dev/">Multi-Player</a>
+      </button>
+
+      <!-- Add the level indicator element -->
+      <div id="level-indicator">Level 1</div>
+      <div id="level-selection">
+        <button onclick="selectLevel('easy')">Easy</button>
+        <button onclick="selectLevel('medium')">Medium</button>
+        <button onclick="selectLevel('hard')">Hard</button>
+      </div>
+      <div id="play-text">Press Space to Play</div>
+      <div id="wall-collision-switch">
+        <label class="switch">
+          <input
+            type="checkbox"
+            id="wall-collision-toggle"
+            onclick="toggleWallCollision()"
+          />
+          <span class="slider round"></span>
+        </label>
+        <span id="wall-collision-label">Wall Collision: On</span>
+      </div>
+    </div>
+
+    <div id="touch-controls">
+      <button id="moveLeftBtn" onclick="moveLeft()">←</button>
+      <button id="moveRightBtn" onclick="moveRight()">→</button>
+      <button id="moveUpBtn" onclick="moveUp()">↑</button>
+      <button id="moveDownBtn" onclick="moveDown()">↓</button>
+    </div>
+    <audio id="game-over-sound" preload="auto">
+      <source src="resource/2G7CF5V-gamers-fail-game.mp3" type="audio/mp3" />
+      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
+      <!-- For example: <source src="path/to/your/sound-effect.ogg" type="audio/ogg"> -->
+    </audio>
+    <audio id="background-music" preload="auto" loop>
+      <source src="resource/Press_Start.mp3" type="audio/mp3" />
+      <!-- Add more <source> elements with different audio formats for cross-browser compatibility -->
+    </audio>
+    <script src="snake_game_scripts.js"></script>
   </body>
 </html>
-```
-
-<!-- The code contains HTML elements for the game canvas, settings menu, and necessary scripts.
-
-## CSS Styles
-
-The code includes some CSS styles for the game canvas and settings menu. The styles are defined in a `<style>` tag within the `<head>` section of the HTML.
-
-## Scripts
-
-The code includes several scripts that provide functionality for the game. These scripts are referenced using `<script>` tags at the end of the `<body>` section.
-
-- `gtag.js` is a script for Google Analytics.
-- `script.js` contains the main game logic and handles user interactions.
-
-## Settings Menu
-
-The game includes a settings menu that allows the user to customize various aspects of the game. The menu is defined using a `<form>` tag with the id "menu". It contains several input elements for different settings, such as dark mode, tile size, food value, amount of food, start length, player food dropping, and loop through screen edge.
-
-The settings menu also includes buttons to resume the game and reset the options.
-
-## Version
-
-The version of the game is mentioned at the bottom of the settings menu as `<small>Ver 2.2</small>`. -->
